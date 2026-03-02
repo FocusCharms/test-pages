@@ -21,22 +21,17 @@
 
       const lang = detectLanguage();
 
-      const path = location.pathname.replace(/^\/+/, "");
+      const base = location.pathname.split("/").slice(0, -1).join("/") || "/";
+
+      const path = location.pathname.replace(base, "").replace(/^\/+/, "");
 
       // Already language-prefixed → do nothing
-      if (supported.some(l => path.startsWith(l + "/"))) {
-        return;
-      }
+      if (supported.some(l => path.startsWith(l + "/"))) return;
 
-      // Redirect preserving deep path
-      location.replace("test-pages/" + lang + "/" + path);
+      location.replace(`${base}/${lang}/${path}`);
     })();
   </script>
 
 </head>
-<body>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=/en/">
-  </noscript>
-</body>
+<body></body>
 </html>
