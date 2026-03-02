@@ -28,7 +28,7 @@
       // Already language-prefixed → do nothing
       if (supported.some(l => path.startsWith(l + "/"))) return;
 
-      location.replace(`${base}/${lang}/${path}`);
+      location.replace(`${base}/test-pages/${lang}/${path}`);
     })();
   </script>
 
