@@ -33,9 +33,9 @@
         .replace(base, "")
         .replace(/^\/+/, "");
 
+      console.log(lang, segments, path)
       // Already language-prefixed → do nothing
       if (supported.some(l => path.startsWith(l + "/"))) return;
-
       location.replace(`${base}/${lang}/${path || ""}`);
     })();
   </script>
