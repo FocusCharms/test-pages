@@ -21,14 +21,22 @@
 
       const lang = detectLanguage();
 
-      const base = location.pathname.split("/").slice(0, -1).join("/") || "/";
+      const segments = location.pathname.split("/").filter(Boolean);
 
-      const path = location.pathname.replace(base, "").replace(/^\/+/, "");
+      // GitHub project page → first segment is repo name
+      const base =
+        location.hostname.endsWith("github.io") && segments.length > 0
+          ? "/" + segments[0]
+          : "";
+
+      const path = location.pathname
+        .replace(base, "")
+        .replace(/^\/+/, "");
 
       // Already language-prefixed → do nothing
       if (supported.some(l => path.startsWith(l + "/"))) return;
 
-      location.replace(`${base}/${lang}/${path}`);
+      location.replace(`${base}/${lang}/${path || ""}`);
     })();
   </script>
 
