@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Language Router</title>
+
+  <script>
+    (function () {
+      const supported = ["en", "fr", "de"];
+      const fallback = "en";
+
+      function detectLanguage() {
+        const stored = localStorage.getItem("lang");
+        if (stored && supported.includes(stored)) return stored;
+
+        const nav = navigator.language.slice(0, 2);
+        if (supported.includes(nav)) return nav;
+
+        return fallback;
+      }
+
+      const lang = detectLanguage();
+
+      const path = location.pathname.replace(/^\/+/, "");
+
+      // Already language-prefixed → do nothing
+      if (supported.some(l => path.startsWith(l + "/"))) {
+        return;
+      }
+
+      // Redirect preserving deep path
+      location.replace("/" + lang + "/" + path);
+    })();
+  </script>
+
+</head>
+<body>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/en/">
+  </noscript>
+</body>
+</html>
