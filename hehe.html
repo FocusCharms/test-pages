@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Mode Switch</title>
+<style>
+    /* Base styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Light mode (default) */
+    body.light-mode {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+    /* Toggle button */
+    .toggle-btn {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #007BFF;
+        color: white;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .toggle-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+    <h1>Dark Mode / Light Mode Switch</h1>
+    <button id="modeToggle" class="toggle-btn">Toggle Dark Mode</button>
+
+<script>
+    // Get references
+    const body = document.body;
+    const toggleBtn = document.getElementById('modeToggle');
+
+    // Load saved mode from localStorage
+    const savedMode = localStorage.getItem('theme');
+    if (savedMode) {
+        body.classList.add(savedMode);
+    } else {
+        body.classList.add('light-mode'); // Default
+    }
+
+    // Update button text based on mode
+    function updateButtonText() {
+        if (body.classList.contains('dark-mode')) {
+            toggleBtn.textContent = 'Switch to Light Mode';
+        } else {
+            toggleBtn.textContent = 'Switch to Dark Mode';
+        }
+    }
+    updateButtonText();
+
+    // Toggle mode on button click
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        body.classList.toggle('light-mode');
+
+        // Save mode to localStorage
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            localStorage.setItem('theme', 'light-mode');
+        }
+
+        updateButtonText();
+    });
+</script>
+</body>
+</html>
