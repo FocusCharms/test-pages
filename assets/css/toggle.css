@@ -72,19 +72,3 @@ input:checked ~ .slider::before {
   background-color: var(--dark);
   box-shadow: none;
 }
-
-a {
-  position: relative;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  top: 150px;
-  left: 10px;
-  font-size: 10px;
-  text-decoration: none;
-  color: var(--link);
-  font-weight: bold;
-  text-align: center;
-}
-
-a:hover {
-  color: var(--link-hover);
-}
